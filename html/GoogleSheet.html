@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/code.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-solarizedlight.min.css"
+    />
+    <title>Google Sheet</title>
+  </head>
+  <body>
+    <h1>Google sheet</h1>
+    <br />
+    <h3>Nhiều sheet về 1 sheet</h3>
+
+   <pre><code class="language-vb">=CHOOSECOLS( REDUCE( HSTACK("Ngày", "Số chứng từ", "ĐH_Sapo", "Đối tượng", "Diễn giải", "TK đối ứng", "Thu", "Chi", "TK"),TOCOL( 'Khai báo'!A5:A,3),LAMBDA(x,y, VSTACK(x,LET(data,INDIRECT(INDEX('Khai báo'!B5:B,y)&"!A5:H"), z,FILTER(data,CHOOSECOLS(data,1)<>""), TK,MAKEARRAY(COUNTA(CHOOSECOLS(z,1)),1,LAMBDA(a,b,INDEX('Khai báo'!C5:C,y))), HSTACK(z,TK))))) , 1,2,3,4,5,9,6,7,8)</code></pre>
+
+    <!-- <pre><code class="language-vba"></code></pre> -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  </body>
+  </body>
+</html>
