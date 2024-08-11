@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/code.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-solarizedlight.min.css"
@@ -11,6 +12,7 @@
   </head>
   <body>
     <a href="../index.html">Home</a>
+    <br />
     <h1>VBA</h1>
     <h2>Turn on and turn off stuff</h2>
     <pre><code class="language-vba">Sub TurnOnStuff()
@@ -24,66 +26,49 @@ End Sub</code></pre>
     Application.ScreenUpdating = False
     Application.EnableEvents = False
 End Sub</code></pre>
+    <h2>Tạo file CSV UTF-8</h2>
 
     <pre><code class="language-vba">Sub Test_TaoFileCSV()
-
         TenSheet = "Sheet2"
         i_tu = 4
         i_den = 12
         j_tu = 1
         j_den = 6
         FilePathCSV = Range("A6").Value
-    
     Call TaoFileCSV_UTF8(TenSheet, i_tu, i_den, j_tu, j_den, FilePathCSV)
-    
-    End Sub
-    
-    Sub TaoFileCSV_UTF8(TenSheet, i_tu, i_den, j_tu, j_den, FilePathCSV)
+End Sub</code></pre>
+
+    <pre><code class="language-vba">Sub TaoFileCSV_UTF8(TenSheet, i_tu, i_den, j_tu, j_den, FilePathCSV)
         ' i dong
         ' j cot
-    
         Dim myData As String
         Dim ws As Worksheet
         Dim objStream As Object
         
         Set ws_htai = ThisWorkbook.ActiveSheet
         Set ws = ThisWorkbook.Sheets(TenSheet)
-        
         Set objStream = CreateObject("ADODB.Stream")
+        
         objStream.Charset = "utf-8"
-        
         ws.Activate
-        
         objStream.Open
-        
             For i = i_tu To i_den
-                myData = ""
-                
-                For j = j_tu To j_den
-               
-                    cellValue = ws.Cells(i, j).Value
-                    
+              myData = ""
+                For j = j_tu To j_den        
+                    cellValue = ws.Cells(i, j).Value     
                     cellValue = Replace(cellValue, ",", "_")
                     cellValue = Replace(cellValue, Chr(10), "_")
-                    cellValue = Replace(cellValue, Chr(9), "_")
-                    
-                    myData = myData & cellValue
-                    
-                    If j < j_den Then myData = myData & ","
-                    
-                Next j
-               
-                 objStream.WriteText myData & vbCrLf
+                    cellValue = Replace(cellValue, Chr(9), "_")    
+                    myData = myData & cellValue                  
+                    If j < j_den Then myData = myData & ","      
+                Next j     
+              objStream.WriteText myData & vbCrLf
             Next i
-        
-        objStream.SaveToFile FilePathCSV, 2 ' 2 là dinh dang UTF-8
-    
-        objStream.Close
-        
+        objStream.SaveToFile FilePathCSV, 2 ' 2 là dinh dang UTF-8 
+        objStream.Close     
         ws_htai.Activate
         MsgBox "File CSV da duoc tao và luu thanh cong!"
-        
-    End Sub</code></pre>
+End Sub</code></pre>
 
     <!-- <pre><code class="language-vba"></code></pre> -->
     <!-- <pre><code class="language-vba"></code></pre> -->

@@ -1,0 +1,11 @@
+body {
+  padding-left: 30px;
+  font-family: Calibri, sans-serif;
+  color: #416d19;
+}
+a {
+  color: #416d19;
+}
+a:hover {
+  background-color: #fff67e;
+}
